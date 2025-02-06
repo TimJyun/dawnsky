@@ -1,0 +1,11 @@
+上传最大为100MB，下载为512MB
+https://developers.cloudflare.com/workers/platform/limits/#request-limits
+
+tailwind编译命令
+npx tailwindcss@3 -i ./input.css -o ./assets/tailwind.css --watch
+
+PublicAtAgent::endpoint 应该包含https协议头
+
+todo:
+去除anyhow，标准化错误类型
+优化界面操作和翻译

@@ -1,0 +1,42 @@
+[application]
+# App name
+name = "dawnsky"
+# The Dioxus platform to default to
+default_platform = "web"
+# `build` & `serve` output path
+out_dir = "./dist"
+# The components resource path
+#asset_dir = "public"
+
+[web.app]
+# HTML title tag content
+title = "dawnsky"
+
+[web.watcher]
+# When watcher is triggered, regenerate the `index.html`
+reload_html = true
+# Which files or dirs will be monitored
+watch_path = ["src", "public", "assets"]
+# URL Rewrite
+index_on_404 = true
+
+# Include style or script assets
+[web.resource]
+# CSS style file
+style = []
+# Javascript code file
+script = []
+
+[web.resource.dev]
+# Same as [page.resource], but for development servers
+# CSS style file
+style = []
+# JavaScript files
+script = []
+
+#[[web.proxy]]
+#backend = "http://localhost:8000/api/"
+
+[bundle]
+# The list of files to include in the bundle. These can contain globs.
+resources = []
