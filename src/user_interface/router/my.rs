@@ -89,11 +89,14 @@ pub fn MyPage() -> Element {
             rsx! { "loading" }
         });
 
+    let mut is_login = false;
+
     let login_state_nav_node = match user_profile_res.as_ref() {
         Some(user_info) => {
             //loaded
             match user_info.as_ref() {
                 Ok(user_info) => {
+                    is_login = true;
                     rsx! {
                         div {
                             class: "m-4 w-full text-center",
@@ -144,25 +147,31 @@ pub fn MyPage() -> Element {
                 span { class: "text-xl", "Setting" }
             }
         }
-        div { class: "p-8 text-red-600",
-            span {
-                onclick: move |_| {
-                    async move {
-                        if confirm(["you will be signed out of all your accounts"]).await {
-                            if let Ok(session_store) = get_session_store().await {
-                                if let Ok(dids) = session_store.list_sessions().await {
-                                    for did in dids.into_iter() {
-                                        let _ = session_store.remove_session(did).await;
+        if is_login {
+            div { class: "p-8",
+                span {
+                    class: " text-red-600",
+                    onclick: move |_| {
+                        async move {
+                            if confirm(["you will be signed out of all your accounts"]).await {
+                                if let Ok(session_store) = get_session_store().await {
+                                    if let Ok(dids) = session_store.list_sessions().await {
+                                        for did in dids.into_iter() {
+                                            let _ = session_store.remove_session(did).await;
+                                        }
+                                        let _ = LocalStorage::delete(MAIN_SESSION_DID);
+                                        refresh_app();
                                     }
-                                    let _ = LocalStorage::delete(MAIN_SESSION_DID);
-                                    refresh_app();
                                 }
                             }
                         }
+                    },
+                    img {
+                        class: "size-6 inline-block",
+                        src: SIGN_OUT_ICON_50_50,
                     }
-                },
-                img { class: "size-6 inline-block", src: SIGN_OUT_ICON_50_50 }
-                span { class: "text-xl", "Sign Out" }
+                    span { class: "text-xl", "Sign Out" }
+                }
             }
         }
     }
