@@ -4,14 +4,14 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-serde = "1.0.217"
-opendal = { version = "0.51.0", default-features = false }
-js-sys = { version = "0.3.76" }
-indexed-db = { version = "0.4.1" }
-serde-wasm-bindgen = { version = "0.6.5" }
-serde_bytes = "0.11.15"
-futures = "0.3.31"
-async-once-cell = "0.5.4"
-send_wrapper = "0.6.0"
+serde = "1.0"
+opendal = { version = "0.51", default-features = false }
+js-sys = { version = "0.3" }
+indexed-db = { version = "0.4" }
+serde-wasm-bindgen = { version = "0.6" }
+serde_bytes = "0.11"
+futures = "0.3"
+async-once-cell = "0.5"
+send_wrapper = "0.6"
 
 
