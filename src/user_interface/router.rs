@@ -1,3 +1,4 @@
+use crate::user_interface::router::pds::users_management::PdsUsersManagementPage;
 use crate::user_interface::router::post::PostPage;
 
 use crate::user_interface::router::conversation::ConversationPage;
@@ -6,18 +7,19 @@ use crate::user_interface::router::layout::top_navigation::TopNavigation;
 use crate::user_interface::router::login::LoginPage;
 use crate::user_interface::router::message::MessagePage;
 use crate::user_interface::router::my::MyPage;
-use crate::user_interface::router::pds::pds_users::PdsUsers;
 use crate::user_interface::router::profile::ProfilePage;
 use crate::user_interface::router::setting::password::PasswordPage;
 use crate::user_interface::router::setting::SettingPage;
 use crate::user_interface::router::signup::SignupPage;
 use crate::user_interface::router::social::SocialPage;
 
+use crate::user_interface::router::pds::PdsPage;
 use crate::util::sleep::sleep;
 use atrium_api::types::string::{Did, Handle};
 use derive_more::{Display, FromStr};
 use dioxus::prelude::*;
 
+use crate::pds::PdsDomain;
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
 
@@ -72,10 +74,10 @@ pub enum AppRoute {
     //
     //
     //pds admin
-    #[route("/pds_users")]
-    PdsUsers{},
-
-
+    #[route("/pds/:pds_domain/users")]
+    PdsUsersManagementPage{pds_domain: PdsDomain},
+    #[route("/pds")]
+    PdsPage{},
     //
     //
     //

@@ -168,8 +168,6 @@ pub fn PostPage(user_handle: Handle, record_key: String) -> Element {
                                     }
                                 },
                             }
-                        
-
                         }
                     }
                 }

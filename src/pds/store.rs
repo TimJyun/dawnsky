@@ -87,8 +87,7 @@ pub trait SessionStoreOperator {
     async fn get_agent(&self, did: Did) -> Result<AtAgent<Self::Store>, CustomError>;
     async fn create_account(
         &self,
-        username: String,
-        pds: String,
+        handle: String,
         password: String,
         email: String,
         invite_code: Option<String>,
@@ -139,14 +138,13 @@ impl<S: SessionStore> SessionStoreOperator for Arc<S> {
     }
     async fn create_account(
         &self,
-        username: String,
-        pds: String,
+        handle: String,
         password: String,
         email: String,
         invite_code: Option<String>,
     ) -> Result<create_account::Output, anyhow::Error> {
-        let handle = format!("{username}.{pds}");
-        let url = format!("https://{pds}/xrpc/com.atproto.server.createAccount");
+        // let handle = format!("{username}.{pds}");
+        let url = format!("https://{handle}/xrpc/com.atproto.server.createAccount");
 
         let output = reqwest::Client::new()
             .post(url)

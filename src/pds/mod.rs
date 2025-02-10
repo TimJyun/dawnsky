@@ -14,6 +14,9 @@ pub mod user;
 pub mod user_did;
 pub mod util;
 
+pub type PdsDomain = String;
+pub type PdsPassword = String;
+
 pub static PUBLIC_AGENT: Lazy<BskyAgent> = Lazy::new(|| {
     futures::executor::block_on(
         BskyAgent::builder()

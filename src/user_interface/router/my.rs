@@ -147,6 +147,12 @@ pub fn MyPage() -> Element {
                 span { class: "text-xl", "Setting" }
             }
         }
+        div { class: "p-8",
+            Link { to: AppRoute::PdsPage {},
+                img { class: "size-6 inline-block", src: SETTING_ICON_50_50 }
+                span { class: "text-xl", "PDS" }
+            }
+        }
         if is_login {
             div { class: "p-8",
                 span {

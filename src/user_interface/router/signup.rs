@@ -20,8 +20,7 @@ pub fn SignupPage() -> Element {
         }
     });
 
-    let mut username = use_signal(String::new);
-    let mut pds = use_signal(String::new);
+    let mut handle = use_signal(String::new);
     let mut email = use_signal(String::new);
     let mut password = use_signal(String::new);
     let mut password2 = use_signal(String::new);
@@ -34,14 +33,7 @@ pub fn SignupPage() -> Element {
                 "handle:"
                 input {
                     onchange: move |evt| {
-                        username.set(evt.value().to_string());
-                    },
-                }
-                " . "
-                input {
-                    value: pds,
-                    onchange: move |evt| {
-                        pds.set(evt.value().to_string());
+                        handle.set(evt.value().to_string());
                     },
                 }
             }
@@ -89,8 +81,7 @@ pub fn SignupPage() -> Element {
                         busying.set(true);
                         async move {
                             if let Ok(session_store) = get_session_store().await {
-                                let username = username.peek().trim().to_string();
-                                let pds = pds.peek().to_string();
+                                let handle = handle.peek().trim().to_string();
                                 let passwd = password.peek().to_string();
                                 let email = email.peek().trim().to_string();
                                 let invite_code = invite_code.peek().to_string();
@@ -100,13 +91,13 @@ pub fn SignupPage() -> Element {
                                     Some(invite_code)
                                 };
                                 match session_store
-                                    .create_account(username, pds, passwd, email, invite_code)
+                                    .create_account(handle, passwd, email, invite_code)
                                     .await
                                 {
                                     Ok(account_info) => {
                                         debug!(
-                                            "success to creat account , handle : {} , did : {}",
-                                            account_info.handle.as_str(), account_info.did.as_str()
+                                            "success to creat account , handle : {} ", account_info
+                                            .handle.as_str()
                                         );
                                         debug!("{}", serde_json::to_string(& account_info).unwrap());
                                         let _ = LocalStorage::set(

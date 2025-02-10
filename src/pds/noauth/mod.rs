@@ -7,6 +7,7 @@ pub mod app_bsky_actor_getProfile;
 mod app_bsky_feed_getAuthorFeed;
 mod app_bsky_feed_getPostThread;
 pub mod com_atproto_sync_getBlob;
+pub mod com_atproto_sync_listRepos;
 
 pub struct PublicAtAgent {
     pub endpoint: Cow<'static, str>,

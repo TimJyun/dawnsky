@@ -233,13 +233,7 @@ fn Accounts() -> Element {
                                     Ok(())
                                 }
                             },
-
-
-
                             {set_main_session}
-
-
-
                             "x"
                         }
                     }
